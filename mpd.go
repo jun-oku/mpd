@@ -136,21 +136,22 @@ type AdaptationSet struct {
 
 // Representation represents XSD's RepresentationType.
 type Representation struct {
-	ID                 *string          `xml:"id,attr"`
-	Width              *uint64          `xml:"width,attr"`
-	Height             *uint64          `xml:"height,attr"`
-	FrameRate          *string          `xml:"frameRate,attr"`
-	Bandwidth          *uint64          `xml:"bandwidth,attr"`
-	AudioSamplingRate  *string          `xml:"audioSamplingRate,attr"`
-	Codecs             *string          `xml:"codecs,attr"`
-	ContentProtections []Descriptor     `xml:"ContentProtection,omitempty"`
-	SegmentTemplate    *SegmentTemplate `xml:"SegmentTemplate,omitempty"`
+	ID                 *string             `xml:"id,attr"`
+	Width              *uint64             `xml:"width,attr"`
+	Height             *uint64             `xml:"height,attr"`
+	FrameRate          *string             `xml:"frameRate,attr"`
+	Bandwidth          *uint64             `xml:"bandwidth,attr"`
+	AudioSamplingRate  *string             `xml:"audioSamplingRate,attr"`
+	Codecs             *string             `xml:"codecs,attr"`
+	ContentProtections []ContentProtection `xml:"ContentProtection,omitempty"`
+	SegmentTemplate    *SegmentTemplate    `xml:"SegmentTemplate,omitempty"`
 }
 
-// Descriptor represents XSD's DescriptorType.
-type Descriptor struct {
+// ContentProtection represents XSD's DescriptorType.
+type ContentProtection struct {
 	SchemeIDURI *string `xml:"schemeIdUri,attr"`
 	Value       *string `xml:"value,attr"`
+	Pssh        *string `xml:"ContentProtection>cenc:pssh,omitempty"`
 }
 
 // SegmentTemplate represents XSD's SegmentTemplateType.
