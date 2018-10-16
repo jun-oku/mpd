@@ -123,15 +123,15 @@ type Period struct {
 
 // AdaptationSet represents XSD's AdaptationSetType.
 type AdaptationSet struct {
-	MimeType                string           `xml:"mimeType,attr"`
-	SegmentAlignment        ConditionalUint  `xml:"segmentAlignment,attr"`
-	SubsegmentAlignment     ConditionalUint  `xml:"subsegmentAlignment,attr"`
-	StartWithSAP            *uint64          `xml:"startWithSAP,attr"`
-	SubsegmentStartsWithSAP *uint64          `xml:"subsegmentStartsWithSAP,attr"`
-	BitstreamSwitching      *bool            `xml:"bitstreamSwitching,attr"`
-	Lang                    *string          `xml:"lang,attr"`
-	ContentProtections      []Descriptor     `xml:"ContentProtection,omitempty"`
-	Representations         []Representation `xml:"Representation,omitempty"`
+	MimeType                string              `xml:"mimeType,attr"`
+	SegmentAlignment        ConditionalUint     `xml:"segmentAlignment,attr"`
+	SubsegmentAlignment     ConditionalUint     `xml:"subsegmentAlignment,attr"`
+	StartWithSAP            *uint64             `xml:"startWithSAP,attr"`
+	SubsegmentStartsWithSAP *uint64             `xml:"subsegmentStartsWithSAP,attr"`
+	BitstreamSwitching      *bool               `xml:"bitstreamSwitching,attr"`
+	Lang                    *string             `xml:"lang,attr"`
+	ContentProtections      []ContentProtection `xml:"ContentProtection,omitempty"`
+	Representations         []Representation    `xml:"Representation,omitempty"`
 }
 
 // Representation represents XSD's RepresentationType.
