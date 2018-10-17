@@ -147,11 +147,16 @@ type Representation struct {
 	SegmentTemplate    *SegmentTemplate    `xml:"SegmentTemplate,omitempty"`
 }
 
-// ContentProtection represents XSD's DescriptorType.
+// ContentProtection represents XSD's ContentProtectionType.
 type ContentProtection struct {
 	SchemeIDURI *string `xml:"schemeIdUri,attr"`
 	Value       *string `xml:"value,attr"`
-	Pssh        *string `xml:"ContentProtection>cenc:pssh,omitempty"`
+	Pssh        *Pssh   `xml:"pssh,omitempty"`
+}
+
+// Pssh represents XSD's PsshType.
+type Pssh struct {
+	Cenc *string `xml:",chardata"`
 }
 
 // SegmentTemplate represents XSD's SegmentTemplateType.
