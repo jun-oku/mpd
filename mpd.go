@@ -8,6 +8,7 @@ import (
 	"io"
 	"regexp"
 	"strconv"
+	"strings"
 )
 
 // http://mpeg.chiariglione.org/standards/mpeg-dash
@@ -95,6 +96,12 @@ func (m *MPD) Encode() ([]byte, error) {
 		s, err := x.ReadString('\n')
 		if s != "" {
 			s = emptyElementRE.ReplaceAllString(s, `/>`)
+			// namespaceへの対応が必要なためここで書き換える
+			// 参考 : https://github.com/golang/go/issues/11496
+			if strings.Contains(s, "pssh") {
+				s = strings.Replace(s, "cenc", "xmlns:cenc", -1)
+				s = strings.Replace(s, "pssh", "cenc:pssh", -1)
+			}
 			res.WriteString(s)
 		}
 		if err == io.EOF {
@@ -157,6 +164,7 @@ type ContentProtection struct {
 // Pssh represents XSD's PsshType.
 type Pssh struct {
 	Value *string `xml:",chardata"`
+	Cenc  *string `xml:"cenc,attr"`
 }
 
 // SegmentTemplate represents XSD's SegmentTemplateType.
