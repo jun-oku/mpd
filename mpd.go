@@ -156,7 +156,7 @@ type ContentProtection struct {
 
 // Pssh represents XSD's PsshType.
 type Pssh struct {
-	Cenc *string `xml:",chardata"`
+	Value *string `xml:",chardata"`
 }
 
 // SegmentTemplate represents XSD's SegmentTemplateType.
