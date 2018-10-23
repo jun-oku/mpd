@@ -102,6 +102,10 @@ func (m *MPD) Encode() ([]byte, error) {
 				s = strings.Replace(s, "cenc", "xmlns:cenc", -1)
 				s = strings.Replace(s, "pssh", "cenc:pssh", -1)
 			}
+			if strings.Contains(s, "default_KID") {
+				s = strings.Replace(s, "default_KID", "cenc:default_KID", -1)
+				s = strings.Replace(s, "cenc=", "xmlns:cenc=", -1)
+			}
 			res.WriteString(s)
 		}
 		if err == io.EOF {
@@ -159,6 +163,8 @@ type ContentProtection struct {
 	SchemeIDURI *string `xml:"schemeIdUri,attr"`
 	Value       *string `xml:"value,attr"`
 	Pssh        *Pssh   `xml:"pssh,omitempty"`
+	DefaultKID  *string `xml:"default_KID,attr"`
+	Cenc        *string `xml:"cenc,attr"`
 }
 
 // Pssh represents XSD's PsshType.
