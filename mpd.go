@@ -156,6 +156,7 @@ type Representation struct {
 	Codecs             *string             `xml:"codecs,attr"`
 	ContentProtections []ContentProtection `xml:"ContentProtection,omitempty"`
 	SegmentTemplate    *SegmentTemplate    `xml:"SegmentTemplate,omitempty"`
+	ScanType           *string             `xml:"scanType,attr"`
 }
 
 // ContentProtection represents XSD's ContentProtectionType.
