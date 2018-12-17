@@ -106,6 +106,9 @@ func (m *MPD) Encode() ([]byte, error) {
 				s = strings.Replace(s, "default_KID", "cenc:default_KID", -1)
 				s = strings.Replace(s, "cenc=", "xmlns:cenc=", -1)
 			}
+			if strings.TrimSpace(s) == "<SegmentTimeline/>" {
+				s = ""
+			}
 			res.WriteString(s)
 		}
 		if err == io.EOF {
