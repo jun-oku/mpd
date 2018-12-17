@@ -179,16 +179,22 @@ type Pssh struct {
 
 // SegmentTemplate represents XSD's SegmentTemplateType.
 type SegmentTemplate struct {
-	Timescale              *uint64            `xml:"timescale,attr"`
-	Media                  *string            `xml:"media,attr"`
-	Initialization         *string            `xml:"initialization,attr"`
-	StartNumber            *uint64            `xml:"startNumber,attr"`
-	PresentationTimeOffset *uint64            `xml:"presentationTimeOffset,attr"`
-	SegmentTimelineS       []SegmentTimelineS `xml:"SegmentTimeline>S,omitempty"`
+	Timescale              *uint64           `xml:"timescale,attr"`
+	Media                  *string           `xml:"media,attr"`
+	Initialization         *string           `xml:"initialization,attr"`
+	StartNumber            *uint64           `xml:"startNumber,attr"`
+	PresentationTimeOffset *uint64           `xml:"presentationTimeOffset,attr"`
+	Duration               *uint32           `xml:"duration,attr,omitempty"`
+	SegmentTimeline        []SegmentTimeline `xml:"SegmentTimeline,omitempty"`
 }
 
-// SegmentTimelineS represents XSD's SegmentTimelineType's inner S elements.
-type SegmentTimelineS struct {
+// SegmentTimeline represents XSD's SegmentTimelineType.
+type SegmentTimeline struct {
+	Segments []SegmentTimelineSegment `xml:"S,omitempty"`
+}
+
+// SegmentTimelineSegment represents XSD's SegmentTimelineType's inner S elements.
+type SegmentTimelineSegment struct {
 	T *uint64 `xml:"t,attr"`
 	D uint64  `xml:"d,attr"`
 	R *int64  `xml:"r,attr"`
