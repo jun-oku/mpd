@@ -98,9 +98,13 @@ func (m *MPD) Encode() ([]byte, error) {
 			s = emptyElementRE.ReplaceAllString(s, `/>`)
 			// namespaceへの対応が必要なためここで書き換える
 			// 参考 : https://github.com/golang/go/issues/11496
-			if strings.Contains(s, "pssh") {
-				s = strings.Replace(s, "cenc", "xmlns:cenc", -1)
+			if strings.Contains(s, "<pssh") {
+				s = strings.Replace(s, "cenc", "xmlns:cenc", 1)
 				s = strings.Replace(s, "pssh", "cenc:pssh", -1)
+			}
+			if strings.Contains(s, "<pro") {
+				s = strings.Replace(s, "mspr", "xmlns:mspr", 1)
+				s = strings.Replace(s, "pro", "mspr:pro", -1)
 			}
 			if strings.Contains(s, "default_KID") {
 				s = strings.Replace(s, "default_KID", "cenc:default_KID", -1)
@@ -166,15 +170,22 @@ type Representation struct {
 type ContentProtection struct {
 	SchemeIDURI *string `xml:"schemeIdUri,attr"`
 	Value       *string `xml:"value,attr"`
-	Pssh        *Pssh   `xml:"pssh,omitempty"`
 	DefaultKID  *string `xml:"default_KID,attr"`
 	Cenc        *string `xml:"cenc,attr"`
+	Pssh        *Pssh   `xml:"pssh,omitempty"`
+	Pro         *Pro    `xml:"pro,omitempty"`
 }
 
 // Pssh represents XSD's PsshType.
 type Pssh struct {
 	Value *string `xml:",chardata"`
 	Cenc  *string `xml:"cenc,attr"`
+}
+
+// Pro represents XSD's PsshType.
+type Pro struct {
+	Value *string `xml:",chardata"`
+	Mspr  *string `xml:"mspr,attr"`
 }
 
 // SegmentTemplate represents XSD's SegmentTemplateType.
