@@ -63,6 +63,7 @@ var (
 // MPD represents root XML element.
 type MPD struct {
 	XMLNS                      *string `xml:"xmlns,attr"`
+	Cenc                       *string `xml:"cenc,attr"`
 	Type                       *string `xml:"type,attr"`
 	MinimumUpdatePeriod        *string `xml:"minimumUpdatePeriod,attr"`
 	AvailabilityStartTime      *string `xml:"availabilityStartTime,attr"`
@@ -98,6 +99,9 @@ func (m *MPD) Encode() ([]byte, error) {
 			s = emptyElementRE.ReplaceAllString(s, `/>`)
 			// namespaceへの対応が必要なためここで書き換える
 			// 参考 : https://github.com/golang/go/issues/11496
+			if strings.Contains(s, "<MPD") {
+				s = strings.Replace(s, "cenc", "xmlns:cenc", 1)
+			}
 			if strings.Contains(s, "<pssh") {
 				s = strings.Replace(s, "cenc", "xmlns:cenc", 1)
 				s = strings.Replace(s, "pssh", "cenc:pssh", -1)
@@ -150,6 +154,8 @@ type AdaptationSet struct {
 	Lang                    *string             `xml:"lang,attr"`
 	ContentProtections      []ContentProtection `xml:"ContentProtection,omitempty"`
 	Representations         []Representation    `xml:"Representation,omitempty"`
+	FrameRate               *string             `xml:"frameRate,attr"`
+	SegmentTemplate         *SegmentTemplate    `xml:"SegmentTemplate,omitempty"`
 }
 
 // Representation represents XSD's RepresentationType.
