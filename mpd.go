@@ -137,10 +137,17 @@ func (m *MPD) Decode(b []byte) error {
 
 // Period represents XSD's PeriodType.
 type Period struct {
-	Start          *string          `xml:"start,attr"`
-	ID             *string          `xml:"id,attr"`
-	Duration       *string          `xml:"duration,attr"`
-	AdaptationSets []*AdaptationSet `xml:"AdaptationSet,omitempty"`
+	Start                *string          `xml:"start,attr"`
+	ID                   *string          `xml:"id,attr"`
+	Duration             *string          `xml:"duration,attr"`
+	AdaptationSets       []*AdaptationSet `xml:"AdaptationSet,omitempty"`
+	SupplementalProperty *Descriptor      `xml:"SupplementalProperty,omitempty"`
+}
+
+type Descriptor struct {
+	SchemeIDURI *string `xml:"schemeIdUri,attr"`
+	Value       *string `xml:"value,attr"`
+	ID          *string `xml:"id,attr"`
 }
 
 // AdaptationSet represents XSD's AdaptationSetType.
