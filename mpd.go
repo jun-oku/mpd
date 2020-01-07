@@ -167,16 +167,24 @@ type AdaptationSet struct {
 
 // Representation represents XSD's RepresentationType.
 type Representation struct {
-	ID                 *string             `xml:"id,attr"`
-	Width              *uint64             `xml:"width,attr"`
-	Height             *uint64             `xml:"height,attr"`
-	FrameRate          *string             `xml:"frameRate,attr"`
-	Bandwidth          *uint64             `xml:"bandwidth,attr"`
-	AudioSamplingRate  *string             `xml:"audioSamplingRate,attr"`
-	Codecs             *string             `xml:"codecs,attr"`
-	ContentProtections []ContentProtection `xml:"ContentProtection,omitempty"`
-	SegmentTemplate    *SegmentTemplate    `xml:"SegmentTemplate,omitempty"`
-	ScanType           *string             `xml:"scanType,attr"`
+	ID                        *string                    `xml:"id,attr"`
+	Width                     *uint64                    `xml:"width,attr"`
+	Height                    *uint64                    `xml:"height,attr"`
+	FrameRate                 *string                    `xml:"frameRate,attr"`
+	Bandwidth                 *uint64                    `xml:"bandwidth,attr"`
+	AudioSamplingRate         *string                    `xml:"audioSamplingRate,attr"`
+	Codecs                    *string                    `xml:"codecs,attr"`
+	ContentProtections        []ContentProtection        `xml:"ContentProtection,omitempty"`
+	SegmentTemplate           *SegmentTemplate           `xml:"SegmentTemplate,omitempty"`
+	ScanType                  *string                    `xml:"scanType,attr"`
+	AudioChannelConfiguration *AudioChannelConfiguration `xml:"AudioChannelConfiguration,omitempty"`
+}
+
+// AudioChannelConfiguration from github.com/zencoder/go-dash //
+type AudioChannelConfiguration struct {
+	SchemeIDURI *string `xml:"schemeIdUri,attr"`
+	// Value will be an int for non-Dolby Schemes, and a hexstring for Dolby Schemes, hence we make it a string
+	Value *string `xml:"value,attr"`
 }
 
 // ContentProtection represents XSD's ContentProtectionType.
