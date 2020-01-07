@@ -64,6 +64,7 @@ var (
 type MPD struct {
 	XMLNS                      *string `xml:"xmlns,attr"`
 	Cenc                       *string `xml:"cenc,attr"`
+	Mspr                       *string `xml:"mspr,attr"`
 	Type                       *string `xml:"type,attr"`
 	MinimumUpdatePeriod        *string `xml:"minimumUpdatePeriod,attr"`
 	AvailabilityStartTime      *string `xml:"availabilityStartTime,attr"`
@@ -101,6 +102,7 @@ func (m *MPD) Encode() ([]byte, error) {
 			// 参考 : https://github.com/golang/go/issues/11496
 			if strings.Contains(s, "<MPD") {
 				s = strings.Replace(s, "cenc", "xmlns:cenc", 1)
+				s = strings.Replace(s, "mspr", "xmlns:mspr", 1)
 			}
 			if strings.Contains(s, "<pssh") {
 				s = strings.Replace(s, "cenc", "xmlns:cenc", 1)
