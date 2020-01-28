@@ -62,19 +62,19 @@ var (
 
 // MPD represents root XML element.
 type MPD struct {
-	XMLNS                      *string `xml:"xmlns,attr"`
-	Cenc                       *string `xml:"cenc,attr"`
-	Mspr                       *string `xml:"mspr,attr"`
-	Type                       *string `xml:"type,attr"`
-	MinimumUpdatePeriod        *string `xml:"minimumUpdatePeriod,attr"`
-	AvailabilityStartTime      *string `xml:"availabilityStartTime,attr"`
-	MediaPresentationDuration  *string `xml:"mediaPresentationDuration,attr"`
-	MinBufferTime              *string `xml:"minBufferTime,attr"`
-	SuggestedPresentationDelay *string `xml:"suggestedPresentationDelay,attr"`
-	TimeShiftBufferDepth       *string `xml:"timeShiftBufferDepth,attr"`
-	PublishTime                *string `xml:"publishTime,attr"`
-	Profiles                   string  `xml:"profiles,attr"`
-	Period                     *Period `xml:"Period,omitempty"`
+	XMLNS                      *string   `xml:"xmlns,attr"`
+	Cenc                       *string   `xml:"cenc,attr"`
+	Mspr                       *string   `xml:"mspr,attr"`
+	Type                       *string   `xml:"type,attr"`
+	MinimumUpdatePeriod        *string   `xml:"minimumUpdatePeriod,attr"`
+	AvailabilityStartTime      *string   `xml:"availabilityStartTime,attr"`
+	MediaPresentationDuration  *string   `xml:"mediaPresentationDuration,attr"`
+	MinBufferTime              *string   `xml:"minBufferTime,attr"`
+	SuggestedPresentationDelay *string   `xml:"suggestedPresentationDelay,attr"`
+	TimeShiftBufferDepth       *string   `xml:"timeShiftBufferDepth,attr"`
+	PublishTime                *string   `xml:"publishTime,attr"`
+	Profiles                   string    `xml:"profiles,attr"`
+	Periods                    []*Period `xml:"Period,omitempty"`
 }
 
 // Do not try to use encoding.TextMarshaler and encoding.TextUnmarshaler:
