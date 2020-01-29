@@ -144,6 +144,7 @@ type Period struct {
 	Duration             *string          `xml:"duration,attr"`
 	AdaptationSets       []*AdaptationSet `xml:"AdaptationSet,omitempty"`
 	SupplementalProperty *Descriptor      `xml:"SupplementalProperty,omitempty"`
+	BaseURL              string           `xml:"BaseURL,omitempty"`
 }
 
 type Descriptor struct {
