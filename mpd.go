@@ -75,6 +75,7 @@ type MPD struct {
 	PublishTime                *string   `xml:"publishTime,attr"`
 	Profiles                   string    `xml:"profiles,attr"`
 	Periods                    []*Period `xml:"Period,omitempty"`
+	BaseURL                    string    `xml:"BaseURL,omitempty"`
 }
 
 // Do not try to use encoding.TextMarshaler and encoding.TextUnmarshaler:
