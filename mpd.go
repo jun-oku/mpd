@@ -74,8 +74,8 @@ type MPD struct {
 	TimeShiftBufferDepth       *string   `xml:"timeShiftBufferDepth,attr"`
 	PublishTime                *string   `xml:"publishTime,attr"`
 	Profiles                   string    `xml:"profiles,attr"`
-	Periods                    []*Period `xml:"Period,omitempty"`
 	BaseURL                    string    `xml:"BaseURL,omitempty"`
+	Periods                    []*Period `xml:"Period,omitempty"`
 }
 
 // Do not try to use encoding.TextMarshaler and encoding.TextUnmarshaler:
@@ -143,9 +143,9 @@ type Period struct {
 	Start                *string          `xml:"start,attr"`
 	ID                   *string          `xml:"id,attr"`
 	Duration             *string          `xml:"duration,attr"`
-	AdaptationSets       []*AdaptationSet `xml:"AdaptationSet,omitempty"`
 	SupplementalProperty *Descriptor      `xml:"SupplementalProperty,omitempty"`
 	BaseURL              string           `xml:"BaseURL,omitempty"`
+	AdaptationSets       []*AdaptationSet `xml:"AdaptationSet,omitempty"`
 }
 
 type Descriptor struct {
