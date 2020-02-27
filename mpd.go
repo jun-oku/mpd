@@ -140,12 +140,14 @@ func (m *MPD) Decode(b []byte) error {
 
 // Period represents XSD's PeriodType.
 type Period struct {
-	Start                *string          `xml:"start,attr"`
-	ID                   *string          `xml:"id,attr"`
-	Duration             *string          `xml:"duration,attr"`
-	SupplementalProperty *Descriptor      `xml:"SupplementalProperty,omitempty"`
-	BaseURL              string           `xml:"BaseURL,omitempty"`
-	AdaptationSets       []*AdaptationSet `xml:"AdaptationSet,omitempty"`
+	Start                *string              `xml:"start,attr"`
+	ID                   *string              `xml:"id,attr"`
+	Duration             *string              `xml:"duration,attr"`
+	SupplementalProperty *Descriptor          `xml:"SupplementalProperty,omitempty"`
+	BaseURL              string               `xml:"BaseURL,omitempty"`
+	EventStreams         []EventStream        `xml:"EventStream,omitempty"`
+	ProgramEventStreams  []ProgramEventStream `xml:"ProgramEventStream,omitempty"`
+	AdaptationSets       []*AdaptationSet     `xml:"AdaptationSet,omitempty"`
 }
 
 type Descriptor struct {
@@ -184,11 +186,37 @@ type Representation struct {
 	AudioChannelConfiguration *AudioChannelConfiguration `xml:"AudioChannelConfiguration,omitempty"`
 }
 
-// AudioChannelConfiguration from github.com/zencoder/go-dash //
+// AudioChannelConfiguration,EventStream,Event from github.com/zencoder/go-dash //
 type AudioChannelConfiguration struct {
 	SchemeIDURI *string `xml:"schemeIdUri,attr"`
 	// Value will be an int for non-Dolby Schemes, and a hexstring for Dolby Schemes, hence we make it a string
 	Value *string `xml:"value,attr"`
+}
+
+// ProgramEventStream represents custom EventStream.
+type ProgramEventStream struct {
+	XMLName     xml.Name `xml:"ProgramEventStream"`
+	SchemeIDURI *string  `xml:"schemeIdUri,attr"`
+	Value       *string  `xml:"value,attr,omitempty"`
+	Timescale   *int64   `xml:"timescale,attr"`
+	Events      []Event  `xml:"Event,omitempty"`
+}
+
+// EventStream from github.com/zencoder/go-dash //
+type EventStream struct {
+	XMLName     xml.Name `xml:"EventStream"`
+	SchemeIDURI *string  `xml:"schemeIdUri,attr"`
+	Value       *string  `xml:"value,attr,omitempty"`
+	Timescale   *int64   `xml:"timescale,attr"`
+	Events      []Event  `xml:"Event,omitempty"`
+}
+
+// Event from github.com/zencoder/go-dash //
+type Event struct {
+	XMLName          xml.Name `xml:"Event"`
+	ID               *string  `xml:"id,attr,omitempty"`
+	PresentationTime *int64   `xml:"presentationTime,attr,omitempty"`
+	Duration         *int64   `xml:"duration,attr,omitempty"`
 }
 
 // ContentProtection represents XSD's ContentProtectionType.
